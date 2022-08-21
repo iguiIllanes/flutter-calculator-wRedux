@@ -196,15 +196,18 @@ class FlutterReduxApp extends StatelessWidget {
                   children: const [
                     CalcButton(
                       text: ".",
+                      action: Add.Dot,
                     ),
                     CalcButton(
                       text: "0",
+                      action: Add.Zero,
                     ),
                     CalcButton(
                       text: "AC",
                       smallText: true,
                       primary: Colors.orangeAccent,
                       onPrimary: Colors.black,
+                      action: Edit.Backspace,
                     ),
                     SizedBox(
                       width: 15.0,
@@ -213,6 +216,7 @@ class FlutterReduxApp extends StatelessWidget {
                       text: "=",
                       primary: Colors.greenAccent,
                       onPrimary: Colors.black,
+                      action: Operations.Equal,
                     ),
                   ],
                 ),
