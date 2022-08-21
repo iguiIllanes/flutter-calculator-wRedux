@@ -23,10 +23,10 @@ class Display extends StatelessWidget {
                   style: const TextStyle(fontSize: 50.0),
                 ),
               ),
-              // Text(
-              //   "=",
-              //   style: TextStyle(fontSize: 40.0, color: Colors.greenAccent),
-              // )
+              const Text(
+                "=",
+                style: TextStyle(fontSize: 40.0, color: Colors.greenAccent),
+              )
             ],
           ),
         ));
