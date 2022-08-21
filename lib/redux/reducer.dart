@@ -68,9 +68,7 @@ AppState addReducer(AppState previousState, dynamic action) {
           currentNumber: previousState.currentNumber + 0.0,
           operacion: "${previousState.currentNumber}+.");
     default:
-      return AppState(
-          currentNumber: previousState.currentNumber,
-          operacion: previousState.operacion);
+      return previousState;
   }
 
   log("${(previousState.currentNumber * 10) + selectedNumber}");
@@ -80,4 +78,19 @@ AppState addReducer(AppState previousState, dynamic action) {
       operacion: "${previousState.operacion}$selectedNumber");
 }
 
-final reducers = combineReducers([operationsReducer, addReducer]);
+AppState editReducer(AppState previousState, dynamic action) {
+  switch (action) {
+    case Edit.AC:
+      return const AppState(currentNumber: 0, operacion: "");
+    case Edit.Backspace:
+      String previousOperacion = previousState.operacion;
+      log("${num.parse(previousOperacion.substring(0, previousOperacion.length - 1))}");
+      return AppState(
+          currentNumber: num.parse(previousOperacion.substring(0, previousOperacion.length - 1)),
+          operacion: previousOperacion
+              .substring(0, previousOperacion.length - 1));
+  }
+  return previousState;
+}
+
+final reducers = combineReducers([operationsReducer, addReducer, editReducer]);
