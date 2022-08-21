@@ -9,8 +9,12 @@ import './actions.dart';
 class AppState {
   final dynamic currentNumber;
   final String operacion;
+  final bool isFloatingPointActive;
 
-  const AppState({required this.currentNumber, required this.operacion});
+  const AppState(
+      {required this.currentNumber,
+      required this.operacion,
+      this.isFloatingPointActive = false});
 
   AppState copyWith({currentNumber, operacion}) {
     return AppState(
@@ -64,18 +68,27 @@ AppState addReducer(AppState previousState, dynamic action) {
       selectedNumber = 9;
       break;
     case Add.Dot:
-      return AppState(
-          currentNumber: previousState.currentNumber + 0.0,
-          operacion: "${previousState.currentNumber}+.");
+      log("zi\n${previousState.isFloatingPointActive}");
+      if (!previousState.isFloatingPointActive) {
+        return AppState(
+            currentNumber: previousState.currentNumber + 0.0,
+            operacion: "${previousState.currentNumber}.",
+            isFloatingPointActive: true);
+      }
+      return previousState;
     default:
       return previousState;
   }
 
-  log("${(previousState.currentNumber * 10) + selectedNumber}");
+  log("${(previousState.currentNumber)}"); //* 10) + selectedNumber}");
 
   return AppState(
-      currentNumber: (previousState.currentNumber * 10) + selectedNumber,
-      operacion: "${previousState.operacion}$selectedNumber");
+      currentNumber: previousState.isFloatingPointActive
+          ? (num.parse("${previousState.operacion}$selectedNumber"))
+          : ((previousState.currentNumber * 10) + selectedNumber),
+      operacion: "${previousState.operacion}$selectedNumber",
+      isFloatingPointActive:
+          previousState.isFloatingPointActive ? true : false);
 }
 
 AppState editReducer(AppState previousState, dynamic action) {
@@ -84,11 +97,15 @@ AppState editReducer(AppState previousState, dynamic action) {
       return const AppState(currentNumber: 0, operacion: "");
     case Edit.Backspace:
       String previousOperacion = previousState.operacion;
+      if (previousOperacion.length <= 1) {
+        return const AppState(currentNumber: 0, operacion: "");
+      }
       log("${num.parse(previousOperacion.substring(0, previousOperacion.length - 1))}");
       return AppState(
-          currentNumber: num.parse(previousOperacion.substring(0, previousOperacion.length - 1)),
-          operacion: previousOperacion
-              .substring(0, previousOperacion.length - 1));
+          currentNumber: num.parse(
+              previousOperacion.substring(0, previousOperacion.length - 1)),
+          operacion:
+              previousOperacion.substring(0, previousOperacion.length - 1));
   }
   return previousState;
 }
