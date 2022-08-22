@@ -30,10 +30,13 @@ class Display extends StatelessWidget {
                   style: const TextStyle(fontSize: 25.0, color: Colors.white60),
                 ),
               ),
-              const Text(
-                "=",
-                style: TextStyle(fontSize: 40.0, color: Colors.greenAccent),
-              )
+              StoreConnector<AppState, String>(
+                  converter: (store) => store.state.result,
+                  builder: (context, result) => Text(
+                        "= $result",
+                        style: const TextStyle(
+                            fontSize: 40.0, color: Colors.greenAccent),
+                      )),
             ],
           ),
         ));
