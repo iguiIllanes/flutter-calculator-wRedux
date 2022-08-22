@@ -38,9 +38,10 @@ AppState addHandler(AppState previousState, dynamic action) {
       if (!previousState.isFloatingPointActive) {
         return AppState(
             currentNumber: previousState.currentNumber + 0.0,
-            operacion: "${previousState.currentNumber}.",
+            operacion: "${previousState.operacion}.",
             current: "${previousState.currentNumber}.",
-            isFloatingPointActive: true);
+            isFloatingPointActive: true,
+            operations: previousState.operations);
       }
       return previousState;
     default:
@@ -49,10 +50,10 @@ AppState addHandler(AppState previousState, dynamic action) {
 
   return AppState(
       currentNumber: previousState.isFloatingPointActive
-          ? (num.parse("${previousState.operacion}$selectedNumber"))
+          ? (num.parse("${previousState.current}$selectedNumber"))
           : ((previousState.currentNumber * 10) + selectedNumber),
       operacion: "${previousState.operacion}$selectedNumber",
-      current: "${previousState.operacion}$selectedNumber",
-      isFloatingPointActive:
-          previousState.isFloatingPointActive ? true : false);
+      current: "${previousState.current}$selectedNumber",
+      isFloatingPointActive: previousState.isFloatingPointActive ? true : false,
+      operations: previousState.operations);
 }

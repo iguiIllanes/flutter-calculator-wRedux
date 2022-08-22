@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import './actions.dart';
@@ -10,9 +12,9 @@ class AppState {
   final dynamic currentNumber;
   final String operacion;
   final String current;
-  final dynamic precalculatedResult;
   final String result;
   final bool isFloatingPointActive;
+  final List<dynamic> operations;
 
   const AppState(
       {required this.currentNumber,
@@ -20,7 +22,7 @@ class AppState {
       this.current = "a",
       this.isFloatingPointActive = false,
       this.result = "",
-      this.precalculatedResult = 0});
+      required this.operations});
 }
 
 AppState reducer(AppState previousState, dynamic action) {
