@@ -64,10 +64,10 @@ dynamic _operate(List<dynamic> operations) {
           result += 0;
       }
     }
-
-    
   }
 
-  log("result: $result");
+  if (result.runtimeType == double) {
+    return double.parse(result.toString()).toStringAsFixed(4);
+  }
   return result;
 }
