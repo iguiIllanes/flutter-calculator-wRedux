@@ -33,14 +33,14 @@ class CalcButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             shape: const CircleBorder(),
             padding: const EdgeInsets.all(20),
-            fixedSize: const Size(80.0, 80.0),
+            fixedSize: const Size(70.0, 70.0),
             primary: primary,
             onPrimary: onPrimary,
           ),
           child: Text(
             text,
             style: TextStyle(
-              fontSize: smallText ? 25.0 : 35.0,
+              fontSize: smallText ? 20.0 : 30.0,
             ),
           ),
         ),

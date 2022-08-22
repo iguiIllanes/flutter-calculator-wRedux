@@ -11,16 +11,23 @@ class Display extends StatelessWidget {
         width: double.infinity,
         height: 250.0,
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               StoreConnector<AppState, String>(
-                converter: (store) => store.state.operacion,
+                converter: (store) => store.state.current,
                 builder: (context, st) => Text(
                   st,
                   style: const TextStyle(fontSize: 50.0),
+                ),
+              ),
+              StoreConnector<AppState, String>(
+                converter: (store) => store.state.operacion,
+                builder: (context, st) => Text(
+                  st,
+                  style: const TextStyle(fontSize: 25.0, color: Colors.white60),
                 ),
               ),
               const Text(

@@ -12,7 +12,7 @@ class HistoryButton extends StatelessWidget {
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0))),
-          fixedSize: MaterialStateProperty.all<Size>(const Size(125.0, 80.0))),
+          fixedSize: MaterialStateProperty.all<Size>(const Size(100.0, 80.0))),
       child: const Icon(
         Icons.history,
         size: 35.0,
