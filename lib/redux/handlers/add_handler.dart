@@ -52,7 +52,7 @@ AppState addHandler(AppState previousState, dynamic action) {
       currentNumber: previousState.isFloatingPointActive
           ? (num.parse("${previousState.current}$selectedNumber"))
           : ((previousState.currentNumber * 10) + selectedNumber),
-      operacion: "${previousState.operacion}$selectedNumber",
+      operacion: "${previousState.result.isNotEmpty ? "" : previousState.operacion}$selectedNumber",
       current: "${previousState.current}$selectedNumber",
       isFloatingPointActive: previousState.isFloatingPointActive ? true : false,
       operations: previousState.operations);
