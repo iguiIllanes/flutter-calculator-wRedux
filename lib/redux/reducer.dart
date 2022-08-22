@@ -1,113 +1,36 @@
-import 'dart:developer'; //debug only!
-
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
 
 import './actions.dart';
+import 'handlers/add_handler.dart';
+import 'handlers/edit_handler.dart';
+import 'handlers/operations_handler.dart';
 
 @immutable
 class AppState {
   final dynamic currentNumber;
   final String operacion;
+  final String current;
+  final dynamic precalculatedResult;
+  final String result;
   final bool isFloatingPointActive;
 
   const AppState(
       {required this.currentNumber,
-      required this.operacion,
-      this.isFloatingPointActive = false});
-
-  AppState copyWith({currentNumber, operacion}) {
-    return AppState(
-        currentNumber: currentNumber ?? this.currentNumber,
-        operacion: operacion ?? this.operacion);
-  }
+      this.operacion = "",
+      this.current = "a",
+      this.isFloatingPointActive = false,
+      this.result = "",
+      this.precalculatedResult = 0});
 }
 
-AppState operationsReducer(AppState previousState, dynamic action) {
-  //TODO finish this!
-  switch (action) {
-    case Operations.Sum:
-      return previousState.copyWith(
-          currentNumber: previousState.currentNumber + 1,
-          operacion: previousState.operacion);
+AppState reducer(AppState previousState, dynamic action) {
+  switch (action.runtimeType) {
+    case Add:
+      return addHandler(previousState, action);
+    case Operations:
+      return operationsHandler(previousState, action);
+    case Edit:
+      return editHandler(previousState, action);
   }
   return previousState;
 }
-
-AppState addReducer(AppState previousState, dynamic action) {
-  dynamic selectedNumber = 0;
-  switch (action) {
-    case Add.Zero:
-      selectedNumber = 0;
-      break;
-    case Add.One:
-      selectedNumber = 1;
-      break;
-    case Add.Two:
-      selectedNumber = 2;
-      break;
-    case Add.Three:
-      selectedNumber = 3;
-      break;
-    case Add.Four:
-      selectedNumber = 4;
-      break;
-    case Add.Five:
-      selectedNumber = 5;
-      break;
-    case Add.Six:
-      selectedNumber = 6;
-      break;
-    case Add.Seven:
-      selectedNumber = 7;
-      break;
-    case Add.Eight:
-      selectedNumber = 8;
-      break;
-    case Add.Nine:
-      selectedNumber = 9;
-      break;
-    case Add.Dot:
-      log("zi\n${previousState.isFloatingPointActive}");
-      if (!previousState.isFloatingPointActive) {
-        return AppState(
-            currentNumber: previousState.currentNumber + 0.0,
-            operacion: "${previousState.currentNumber}.",
-            isFloatingPointActive: true);
-      }
-      return previousState;
-    default:
-      return previousState;
-  }
-
-  log("${(previousState.currentNumber)}"); //* 10) + selectedNumber}");
-
-  return AppState(
-      currentNumber: previousState.isFloatingPointActive
-          ? (num.parse("${previousState.operacion}$selectedNumber"))
-          : ((previousState.currentNumber * 10) + selectedNumber),
-      operacion: "${previousState.operacion}$selectedNumber",
-      isFloatingPointActive:
-          previousState.isFloatingPointActive ? true : false);
-}
-
-AppState editReducer(AppState previousState, dynamic action) {
-  switch (action) {
-    case Edit.AC:
-      return const AppState(currentNumber: 0, operacion: "");
-    case Edit.Backspace:
-      String previousOperacion = previousState.operacion;
-      if (previousOperacion.length <= 1) {
-        return const AppState(currentNumber: 0, operacion: "");
-      }
-      log("${num.parse(previousOperacion.substring(0, previousOperacion.length - 1))}");
-      return AppState(
-          currentNumber: num.parse(
-              previousOperacion.substring(0, previousOperacion.length - 1)),
-          operacion:
-              previousOperacion.substring(0, previousOperacion.length - 1));
-  }
-  return previousState;
-}
-
-final reducers = combineReducers([operationsReducer, addReducer, editReducer]);
