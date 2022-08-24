@@ -45,27 +45,20 @@ AppState operationsHandler(AppState previousState, dynamic action) {
 }
 
 dynamic _operate(List<dynamic> operations) {
-  dynamic result = operations[0];
-  for (int i = 1; i < operations.length; i += 2) {
-    if (operations[i].runtimeType == String) {
-      switch (operations[i]) {
-        case "+":
-          result += operations[i + 1];
-          break;
-        case "-":
-          result -= operations[i + 1];
-          break;
-        case "x":
-          result *= operations[i + 1];
-          break;
-        case "/":
-          result /= operations[i + 1];
-          break;
-        default:
-          result += 0;
+  dynamic result;
+  List<String> operators = ['x', '/', '+', '-'];
+  for (int j = 0; j < 4; j++) {
+    for (int i = 0; i < operations.length; i++) {
+      if (operators[j] == operations[i]) {
+        dynamic result =
+            makeOperation(operations[i - 1], operations[i], operations[i + 1]);
+        operations[i] = result;
+        operations.removeAt(i - 1);
+        operations.removeAt(i);
       }
     }
   }
+  result = operations[0];
 
   if (result.runtimeType == double) {
     result = double.parse(result.toString()).toStringAsFixed(4);
@@ -76,4 +69,23 @@ dynamic _operate(List<dynamic> operations) {
 void addToHistory(String operation, String result) async {
   await DatabaseHelper.instance
       .add(Operation(operation: operation, result: result));
+}
+
+dynamic makeOperation(dynamic a, String operator, dynamic b) {
+  dynamic result;
+  switch (operator) {
+    case "+":
+      result = a + b;
+      break;
+    case "-":
+      result = a - b;
+      break;
+    case "x":
+      result = a * b;
+      break;
+    case "/":
+      result = a / b;
+      break;
+  }
+  return result;
 }
