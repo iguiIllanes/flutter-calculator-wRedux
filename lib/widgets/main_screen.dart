@@ -27,6 +27,7 @@ class MainScreen extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
         title: title,
         home: Scaffold(
