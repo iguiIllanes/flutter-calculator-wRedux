@@ -1,3 +1,4 @@
+import 'package:calculadora/redux/actions.dart';
 import 'package:calculadora/redux/reducer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -8,7 +9,6 @@ class CalcButton extends StatelessWidget {
   final Color onPrimary;
   final bool smallText;
   final dynamic action;
-  // final void Function(Store<AppState> store)? converter;
   const CalcButton({
     Key? key,
     required this.text,
@@ -16,9 +16,7 @@ class CalcButton extends StatelessWidget {
     this.onPrimary = const Color(0xFFFFFFFF),
     this.smallText = false,
     this.action,
-  })
-  // this.converter})
-  : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +24,11 @@ class CalcButton extends StatelessWidget {
       height: 1000.0,
       child: StoreConnector<AppState, VoidCallback>(
         converter: (store) {
+          if (action == Operations.Equal && store.state.result != '=') {
+            // addToHistory(store);
+          }
           return () => store.dispatch(action);
-        }, //aqui
+        },
         builder: (context, callback) => ElevatedButton(
           onPressed: callback,
           style: ElevatedButton.styleFrom(

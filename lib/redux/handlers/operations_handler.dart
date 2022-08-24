@@ -1,8 +1,5 @@
-import 'dart:collection';
-import 'dart:developer';
-
-import 'package:stack/stack.dart';
-
+import '../../db/helper.dart';
+import '../../model/operation.dart';
 import '../reducer.dart';
 import '../actions.dart';
 
@@ -26,12 +23,16 @@ AppState operationsHandler(AppState previousState, dynamic action) {
       // sacar resultados
       newOperations.add(previousState
           .currentNumber); // se asegura de que el ultimo numero se incluya
+
+      String result = _operate(newOperations).toString();
+      addToHistory(previousState.operacion, result);
+
       return AppState(
           currentNumber: 0,
           operacion: previousState.operacion,
           current: "",
-          operations: [],
-          result: _operate(newOperations).toString());
+          operations: const [],
+          result: result);
   }
 
   newOperations.addAll([previousState.currentNumber, operationChar]);
@@ -67,7 +68,12 @@ dynamic _operate(List<dynamic> operations) {
   }
 
   if (result.runtimeType == double) {
-    return double.parse(result.toString()).toStringAsFixed(4);
+    result = double.parse(result.toString()).toStringAsFixed(4);
   }
   return result;
+}
+
+void addToHistory(String operation, String result) async {
+  await DatabaseHelper.instance
+      .add(Operation(operation: operation, result: result));
 }

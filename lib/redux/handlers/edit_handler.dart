@@ -12,7 +12,6 @@ AppState editHandler(AppState previousState, dynamic action) {
     case Edit.Backspace:
       String previousOperacion = previousState.current;
       if (previousOperacion.length <= 1) {
-        //TODO FIX
         return AppState(
             currentNumber: 0,
             operacion: previousState.operacion

@@ -16,7 +16,7 @@ class History extends StatelessWidget {
         child: FutureBuilder<List<Operation>>(
           future: DatabaseHelper.instance.getHistory(),
           builder:
-              (BuildContext context, AsyncSnapshot<List<Operation>> snapshot) {
+              (context, snapshot) {
             if (!snapshot.hasData) {
               return const Center(child: Text("Cargando..."));
             }

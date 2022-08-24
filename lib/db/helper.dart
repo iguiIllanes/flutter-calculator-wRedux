@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:calculadora/model/operation.dart';
 import 'package:sqflite/sqflite.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -40,5 +41,10 @@ class DatabaseHelper {
         ? operations.map((json) => Operation.fromMap(json)).toList()
         : [];
     return operationsList;
+  }
+
+  Future<int> add(Operation operation) async {
+    Database db = await instance.database;
+    return await db.insert('operations', operation.toMap());
   }
 }
