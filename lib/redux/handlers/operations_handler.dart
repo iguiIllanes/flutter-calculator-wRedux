@@ -31,7 +31,7 @@ AppState operationsHandler(AppState previousState, dynamic action) {
           currentNumber: 0,
           operacion: previousState.operacion,
           current: "",
-          operations: const [],
+          operations: [],
           result: result);
   }
 
