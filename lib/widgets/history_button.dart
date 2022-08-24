@@ -1,3 +1,4 @@
+import 'package:calculadora/widgets/history.dart';
 import 'package:flutter/material.dart';
 
 class HistoryButton extends StatelessWidget {
@@ -6,7 +7,7 @@ class HistoryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const History())),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.greenAccent),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
