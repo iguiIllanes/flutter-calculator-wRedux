@@ -1,16 +1,19 @@
-# calculadora
+# Flutter Calculator wRedux
+![App preview](https://imgur.com/a/nMSc2Hg)
+This is a simple example of a calculator made with Flutter and [flutter_redux](https://pub.dev/packages/flutter_redux) for state management!
 
-A new Flutter project.
+This example features:
+ - Basic mathematical operations
+ - Multiple operations made in a single line or entry
+ - History to track all of the operations made by the calculator
 
-## Getting Started
+# Dependencies
 
-This project is a starting point for a Flutter application.
+ - [flutter_redux: ^0.10.0](https://pub.dev/packages/flutter_redux)
+ - [redux: ^5.0.0](https://pub.dev/packages/redux)
+ - [sqflite: ^2.0.3+1](https://pub.dev/packages/sqflite)
+ - [path_provider: ^2.0.11](https://pub.dev/packages/path_provider)
 
-A few resources to get you started if this is your first Flutter project:
+**Make sure to pub get before compiling!**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    flutter pub get
