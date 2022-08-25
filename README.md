@@ -1,5 +1,7 @@
 # Flutter Calculator wRedux
-![App preview](https://imgur.com/a/nMSc2Hg)
+
+![App preview](https://media2.giphy.com/media/l0tunslsYhbr3zk5oG/giphy.gif?cid=790b761154d69c000b8dc409f394bc4ff22b5673944ec3c3&rid=giphy.gif)
+
 This is a simple example of a calculator made with Flutter and [flutter_redux](https://pub.dev/packages/flutter_redux) for state management!
 
 This example features:
