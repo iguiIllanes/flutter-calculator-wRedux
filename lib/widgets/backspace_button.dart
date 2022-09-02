@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 
 class BackspaceButton extends StatelessWidget {
   const BackspaceButton({Key? key}) : super(key: key);
