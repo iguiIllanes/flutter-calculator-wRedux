@@ -1,4 +1,6 @@
+import 'package:calculadora/bloc/app_state_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BackspaceButton extends StatelessWidget {
   const BackspaceButton({Key? key}) : super(key: key);
@@ -6,7 +8,8 @@ class BackspaceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {}, //TODO aniadir funcionalidad
+      onPressed: () => BlocProvider.of<AppStateCubit>(context)
+          .backspacePressed(), //TODO aniadir funcionalidad
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.greenAccent),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

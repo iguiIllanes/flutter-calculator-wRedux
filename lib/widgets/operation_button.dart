@@ -2,19 +2,19 @@ import 'package:calculadora/bloc/app_state_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CalcButton extends StatelessWidget {
+class OperationButton extends StatelessWidget {
   final String text;
   final Color primary;
   final Color onPrimary;
   final bool smallText;
-  final String number;
-  const CalcButton({
+  final String operation;
+  const OperationButton({
     Key? key,
     required this.text,
     this.primary = const Color(0xFF424242),
     this.onPrimary = const Color(0xFFFFFFFF),
     this.smallText = false,
-    required this.number,
+    required this.operation,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,8 @@ class CalcButton extends StatelessWidget {
     return ButtonTheme(
       height: 1000.0,
       child: ElevatedButton(
-        onPressed: () => BlocProvider.of<AppStateCubit>(context).addNumber(number),
+        onPressed: () =>
+            BlocProvider.of<AppStateCubit>(context).addOperation(operation),
         style: ElevatedButton.styleFrom(
           foregroundColor: onPrimary,
           backgroundColor: primary,
