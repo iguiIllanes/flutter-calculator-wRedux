@@ -1,6 +1,4 @@
-import 'package:calculadora/redux/reducer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 
 class Display extends StatelessWidget {
   const Display({Key? key}) : super(key: key);
@@ -16,27 +14,19 @@ class Display extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              StoreConnector<AppState, String>(
-                converter: (store) => store.state.current,
-                builder: (context, st) => Text(
-                  st,
-                  style: const TextStyle(fontSize: 50.0),
-                ),
+              Text(
+                "", //TODO Appstate.current
+                style: const TextStyle(fontSize: 50.0),
               ),
-              StoreConnector<AppState, String>(
-                converter: (store) => store.state.operacion,
-                builder: (context, st) => Text(
-                  st,
-                  style: const TextStyle(fontSize: 25.0, color: Colors.white60),
-                ),
+              Text(
+                "", //TODO AppState.operacion
+                style: const TextStyle(fontSize: 25.0, color: Colors.white60),
               ),
-              StoreConnector<AppState, String>(
-                  converter: (store) => store.state.result,
-                  builder: (context, result) => Text(
-                        "= $result",
-                        style: const TextStyle(
-                            fontSize: 40.0, color: Colors.greenAccent),
-                      )),
+              Text(
+                "= ", //TODO AppState.result
+                style:
+                    const TextStyle(fontSize: 40.0, color: Colors.greenAccent),
+              )
             ],
           ),
         ));
