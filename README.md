@@ -2,7 +2,9 @@
 
 ![App preview](https://media2.giphy.com/media/l0tunslsYhbr3zk5oG/giphy.gif?cid=790b761154d69c000b8dc409f394bc4ff22b5673944ec3c3&rid=giphy.gif)
 
-This is a simple example of a calculator made with Flutter and [--flutter_redux--](https://pub.dev/packages/flutter_redux) for state management!
+** NOTE: This application is no longer using flutter_redux for state management. State management is not controlled by flutter_bloc. **
+
+This is a simple example of a calculator made with Flutter and ~~[flutter_redux](https://pub.dev/packages/flutter_redux)~~ for state management!
 
 This example features:
  - Basic mathematical operations
@@ -19,8 +21,10 @@ This example features:
 
 # Dependencies
 
- - [flutter_redux: ^0.10.0](https://pub.dev/packages/flutter_redux)
- - [redux: ^5.0.0](https://pub.dev/packages/redux)
+ - ~~[flutter_redux: ^0.10.0](https://pub.dev/packages/flutter_redux)~~
+ - ~~[redux: ^5.0.0](https://pub.dev/packages/redux)~~
+ - [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+ - [bloc](https://pub.dev/packages/bloc)
  - [sqflite: ^2.0.3+1](https://pub.dev/packages/sqflite)
  - [path_provider: ^2.0.11](https://pub.dev/packages/path_provider)
  - [math_expressions: ^2.3.1](https://pub.dev/packages/math_expressions)
