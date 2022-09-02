@@ -1,31 +1,26 @@
-import 'package:calculadora/redux/actions.dart';
+import 'package:calculadora/bloc/app_state_cubit.dart';
 import 'package:calculadora/widgets/backspace_button.dart';
 import 'package:calculadora/widgets/history_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/display.dart';
 import '../widgets/button.dart';
-
-//para redux
-import '../redux/reducer.dart';
-
+import 'ac_button.dart';
+import 'operation_button.dart';
 
 class MainScreen extends StatelessWidget {
-  final Store<AppState> store;
   final String title;
 
   const MainScreen({
     Key? key,
-    required this.store,
     required this.title,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<AppState>(
-      store: store,
+    return BlocProvider(
+      create: (context) => AppStateCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
@@ -42,17 +37,17 @@ class MainScreen extends StatelessWidget {
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   spacing: 10.0,
-                  children: const[
+                  children: const [
                     HistoryButton(),
                     BackspaceButton(),
                     SizedBox(
                       width: 15.0,
                     ),
-                    CalcButton(
+                    OperationButton(
                       text: "/",
                       primary: Colors.greenAccent,
                       onPrimary: Colors.black,
-                      action: Operations.Divide,
+                      operation: "/",
                     ),
                   ],
                 ),
@@ -64,24 +59,24 @@ class MainScreen extends StatelessWidget {
                   children: const [
                     CalcButton(
                       text: "7",
-                      action: Add.Seven,
+                      number: "7",
                     ),
                     CalcButton(
                       text: "8",
-                      action: Add.Eight,
+                      number: "8",
                     ),
                     CalcButton(
                       text: "9",
-                      action: Add.Nine,
+                      number: "9",
                     ),
                     SizedBox(
                       width: 15.0,
                     ),
-                    CalcButton(
+                    OperationButton(
                       text: "x",
                       primary: Colors.greenAccent,
                       onPrimary: Colors.black,
-                      action: Operations.Multiply,
+                      operation: "*",
                     ),
                   ],
                 ),
@@ -93,24 +88,24 @@ class MainScreen extends StatelessWidget {
                   children: const [
                     CalcButton(
                       text: "4",
-                      action: Add.Four,
+                      number: "4",
                     ),
                     CalcButton(
                       text: "5",
-                      action: Add.Five,
+                      number: "5",
                     ),
                     CalcButton(
                       text: "6",
-                      action: Add.Six,
+                      number: "6",
                     ),
                     SizedBox(
                       width: 15.0,
                     ),
-                    CalcButton(
+                    OperationButton(
                       text: "-",
                       primary: Colors.greenAccent,
                       onPrimary: Colors.black,
-                      action: Operations.Substract,
+                      operation: "-",
                     ),
                   ],
                 ),
@@ -120,23 +115,23 @@ class MainScreen extends StatelessWidget {
                 Wrap(
                   spacing: 10.0,
                   children: const [
-                    CalcButton(text: "1", action: Add.One),
+                    CalcButton(text: "1", number: "1"),
                     CalcButton(
                       text: "2",
-                      action: Add.Two,
+                      number: "2",
                     ),
                     CalcButton(
                       text: "3",
-                      action: Add.Three,
+                      number: "3",
                     ),
                     SizedBox(
                       width: 15.0,
                     ),
-                    CalcButton(
+                    OperationButton(
                       text: "+",
                       primary: Colors.greenAccent,
                       onPrimary: Colors.black,
-                      action: Operations.Sum,
+                      operation: "+",
                     ),
                   ],
                 ),
@@ -148,27 +143,26 @@ class MainScreen extends StatelessWidget {
                   children: const [
                     CalcButton(
                       text: ".",
-                      action: Add.Dot,
+                      number: ".",
                     ),
                     CalcButton(
                       text: "0",
-                      action: Add.Zero,
+                      number: "0",
                     ),
-                    CalcButton(
+                    ACButton(
                       text: "AC",
                       smallText: true,
                       primary: Colors.orangeAccent,
                       onPrimary: Colors.black,
-                      action: Edit.AC,
                     ),
                     SizedBox(
                       width: 15.0,
                     ),
-                    CalcButton(
+                    OperationButton(
                       text: "=",
                       primary: Colors.greenAccent,
                       onPrimary: Colors.black,
-                      action: Operations.Equal,
+                      operation: "=",
                     ),
                   ],
                 ),

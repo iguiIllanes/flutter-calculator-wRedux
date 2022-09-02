@@ -1,6 +1,7 @@
-import 'package:calculadora/redux/reducer.dart';
+import 'package:calculadora/bloc/app_state.dart';
+import 'package:calculadora/bloc/app_state_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Display extends StatelessWidget {
   const Display({Key? key}) : super(key: key);
@@ -12,32 +13,29 @@ class Display extends StatelessWidget {
         height: 250.0,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              StoreConnector<AppState, String>(
-                converter: (store) => store.state.current,
-                builder: (context, st) => Text(
-                  st,
-                  style: const TextStyle(fontSize: 50.0),
-                ),
-              ),
-              StoreConnector<AppState, String>(
-                converter: (store) => store.state.operacion,
-                builder: (context, st) => Text(
-                  st,
-                  style: const TextStyle(fontSize: 25.0, color: Colors.white60),
-                ),
-              ),
-              StoreConnector<AppState, String>(
-                  converter: (store) => store.state.result,
-                  builder: (context, result) => Text(
-                        "= $result",
-                        style: const TextStyle(
-                            fontSize: 40.0, color: Colors.greenAccent),
-                      )),
-            ],
+          child: BlocBuilder<AppStateCubit, AppState>(
+            builder: (context, state) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    state.current,
+                    style: const TextStyle(fontSize: 50.0),
+                  ),
+                  Text(
+                    state.operacion,
+                    style:
+                        const TextStyle(fontSize: 25.0, color: Colors.white60),
+                  ),
+                  Text(
+                    state.result,
+                    style: const TextStyle(
+                        fontSize: 40.0, color: Colors.greenAccent),
+                  )
+                ],
+              );
+            },
           ),
         ));
   }
